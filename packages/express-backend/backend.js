@@ -133,7 +133,7 @@ app.delete('/users/:id', (req, res) => {
 		res.status(404).send('Resource not found.');
 	} else {
 		deleteUserById(idToDelete);
-		res.send();
+		res.status(204).send();
 	}
 });
 
