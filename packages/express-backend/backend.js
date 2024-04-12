@@ -69,6 +69,22 @@ const deleteUserById = (id) => {
 	);
 };
 
+const generateId = () => {
+	const letters = 'abcdefghijklmnopqrstuvwxyz';
+	const numbers = '1234567890';
+	let id = '';
+
+	for (let i = 0; i < 3; i++) {
+		id += letters.charAt(Math.floor(Math.random() * letters.length));
+	}
+
+	for (let j = 0; j < 3; j++) {
+		id += numbers.charAt(Math.floor(Math.random() * numbers.length));
+	}
+
+	return id;
+};
+
 app.get('/users', (req, res) => {
 	const name = req.query.name;
 	const job = req.query.job;
@@ -101,7 +117,12 @@ app.get('/users/:id', (req, res) => {
 
 app.post('/users', (req, res) => {
 	const userToAdd = req.body;
-	addUser(userToAdd);
+	const userFormatted = {
+		id: generateId(),
+		name: userToAdd.name,
+		job: userToAdd.job,
+	};
+	addUser(userFormatted);
 	res.status(201).send();
 });
 
