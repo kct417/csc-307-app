@@ -123,7 +123,7 @@ app.post('/users', (req, res) => {
 		job: userToAdd.job,
 	};
 	addUser(userFormatted);
-	res.status(201).send();
+	res.status(201).send(userFormatted);
 });
 
 app.delete('/users/:id', (req, res) => {
