@@ -7,12 +7,12 @@ function MyApp() {
 	const [characters, setCharacters] = useState([]);
 
 	function removeOneCharacter(index) {
-		const idToDelete = characters[index].id;
+		const idToDelete = characters[index]._id;
 		deleteUser(idToDelete)
 			.then((res) => {
 				if (res.status === 204) {
 					const updated = characters.filter(
-						(character) => character['id'] !== idToDelete
+						(character) => character['_id'] !== idToDelete
 					);
 					setCharacters(updated);
 				}

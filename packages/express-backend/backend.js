@@ -61,13 +61,18 @@ app.post('/users', (req, res) => {
 
 app.delete('/users/:id', (req, res) => {
 	const idToDelete = req.params['id'];
-	let result = findUserById(idToDelete);
-	if (result === undefined) {
-		res.status(404).send('Resource not found.');
-	} else {
-		deleteUserById(idToDelete);
-		res.status(204).send();
-	}
+	userServices
+		.findUserById(idToDelete)
+		.then((result) => {
+			if (result) {
+				userServices
+					.deleteUserById(idToDelete)
+					.then(res.status(204).send());
+			} else {
+				res.status(404).send('Resource not found.');
+			}
+		})
+		.catch((error) => res.status(500).send(error));
 });
 
 app.listen(port, () => {
