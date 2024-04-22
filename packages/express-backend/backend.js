@@ -13,15 +13,6 @@ app.get('/', (req, res) => {
 	res.send('Hello World!');
 });
 
-const findUserById = (id) =>
-	users['users_list'].find((user) => user['id'] === id);
-
-const deleteUserById = (id) => {
-	users['users_list'] = users['users_list'].filter(
-		(user) => user['id'] !== id
-	);
-};
-
 app.get('/users', (req, res) => {
 	const name = req.query.name;
 	const job = req.query.job;
